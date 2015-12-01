@@ -22,10 +22,10 @@ public class Main {
 
     static ArrayList<Room> possibleNeighbors(ArrayList<ArrayList<Room>> rooms, int row, int col) {
         ArrayList<Room> neighbors = new ArrayList();
-        if (row > 0) neighbors.add(rooms.get(row-1).get(col));
-        if (row > SIZE-1) neighbors.add(rooms.get(row+1).get(col));
-        if (col > 0) neighbors.add(rooms.get(row).get(col-1));
-        if (col > SIZE-1) neighbors.add(rooms.get(row).get(col+1));
+        if (row > 0) neighbors.add(rooms.get(row - 1).get(col));
+        if (row < SIZE-1) neighbors.add(rooms.get(row + 1).get(col));
+        if (col > 0) neighbors.add(rooms.get(row).get(col - 1));
+        if (col < SIZE-1) neighbors.add(rooms.get(row).get(col + 1));
         return neighbors;
     }
 
