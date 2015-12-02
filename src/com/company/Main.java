@@ -65,7 +65,19 @@ public class Main {
     static boolean createMaze(ArrayList<ArrayList<Room>> rooms, Room room) {
         room.wasVisited = true;
         Room nextRoom = randomNeighbor(rooms, room.row, room.col);
+
         if (nextRoom == null) {
+            boolean tempEnd = false;
+            for (ArrayList<Room> roomList : rooms){
+                for (Room tempRoom : roomList){
+                    if (tempRoom.isEnd){
+                        tempEnd = true;
+                    }
+                }
+            }
+            if(!tempEnd){
+                room.isEnd = true;
+            }
             return false;
         }
         tearDownWall(room, nextRoom);
@@ -82,15 +94,28 @@ public class Main {
         for (ArrayList<Room> roomRow : rooms) {
             System.out.print(" _");
         }
+
         System.out.println();
         for (ArrayList<Room> roomRow : rooms) {
             System.out.print("|");
+            for(Room room : roomRow){
+                if(room.row == 0 && room.col == 0){
+                    room.isStart = true;
+                }
+            }
             for (Room room  : roomRow) {
                 String s1 = room.hasBottom ? "_" : " ";
+                if(room.isStart){
+                    s1 = "o";
+                }
                 String s2 = room.hasRight ? "|" : " ";
+                if(room.isEnd){
+                    s1 = "x";
+                }
                 System.out.print(s1 + s2);
             }
             System.out.println();
         }
     }
 }
+
